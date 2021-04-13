@@ -18,13 +18,11 @@ import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import org.altbeacon.beacon.*
-import java.lang.reflect.Method
 
 class SearchBeacon : AppCompatActivity(), View.OnClickListener, BeaconConsumer, RangeNotifier {
 
@@ -119,8 +117,8 @@ class SearchBeacon : AppCompatActivity(), View.OnClickListener, BeaconConsumer, 
                 super.onScanResult(callbackType, result)
                 if (result?.device?.name == "HA_V16"){
                     bluetoothDevice = bluetoothAdapter.getRemoteDevice(result?.device?.address)
-//                    for (i in result.scanRecord?.bytes?.indices!!)
-//                        Log.d(":::", String.format("Byte %d: %02X", i, result.scanRecord?.bytes!![i]))
+                    for (i in result.scanRecord?.bytes?.indices!!)
+                        Log.d(":::", String.format("Byte %d: %02X", i, result.scanRecord?.bytes!![i]))
                     name.text = bluetoothDevice.name
                     mac.text = bluetoothDevice.address
 
@@ -132,9 +130,8 @@ class SearchBeacon : AppCompatActivity(), View.OnClickListener, BeaconConsumer, 
     }
 
     private fun getData(){
-        voltage.text = "VOLTAJE: " + (hexadecimalToDecimal(
-            (scanResult.scanRecord?.bytes!![14].toString()))*256 +
-                hexadecimalToDecimal(scanResult.scanRecord?.bytes!![15].toString())).toString() + " mV"
+        voltage.text = "VOLTAJE: " + (hexadecimalToDecimal(String.format("%02X", scanResult.scanRecord?.bytes!![14])) +
+                hexadecimalToDecimal(String.format("%02X", scanResult.scanRecord?.bytes!![15]))) + " mV"
 
         temp.text = "TEMPERATURA: " + (hexadecimalToDecimal(
             (scanResult.scanRecord?.bytes!![16].toString())) +
