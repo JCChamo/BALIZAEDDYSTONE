@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/teal_700"
             android:stateListAnimator="@null"
-            android:layout_marginLeft="105dp"
+            android:layout_marginLeft="100dp"
             android:layout_marginTop="10dp"
             android:textColor="#fff"
             android:elevation="5dp"
@@ -67,6 +67,67 @@
         android:text="MAC:"
         android:textSize="20dp"
         android:textColor="#000"
+        ></TextView>
+
+    <Button
+        android:id="@+id/dataButton"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/teal_700"
+        android:stateListAnimator="@null"
+        android:layout_marginTop="30dp"
+        android:textColor="#fff"
+        android:elevation="5dp"
+        android:text="MOSTRAR DATOS"
+        android:visibility="invisible"></Button>
+
+    <TextView
+        android:id="@+id/voltage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:textSize="20dp"
+        android:textColor="#000"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/back"
+        android:visibility="invisible"
+        ></TextView>
+
+    <TextView
+        android:id="@+id/temp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="TEMPERATURA: "
+        android:textSize="20dp"
+        android:textColor="#000"
+        android:background="@drawable/back"
+        android:visibility="invisible"
+        ></TextView>
+
+    <TextView
+        android:id="@+id/advertCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="Nº ADVERT FRAMES: "
+        android:textSize="20dp"
+        android:textColor="#000"
+        android:background="@drawable/back"
+        android:visibility="invisible"
+        ></TextView>
+
+    <TextView
+        android:id="@+id/uptime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="TIEMPO ENCENDIDO: "
+        android:textSize="20dp"
+        android:textColor="#000"
+        android:background="@drawable/back"
+        android:visibility="invisible"
         ></TextView>
 
 
