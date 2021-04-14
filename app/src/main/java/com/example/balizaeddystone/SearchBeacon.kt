@@ -133,13 +133,19 @@ class SearchBeacon : AppCompatActivity(), View.OnClickListener, BeaconConsumer, 
         voltage.text = "VOLTAJE: " + (hexadecimalToDecimal(String.format("%02X", scanResult.scanRecord?.bytes!![14])) +
                 hexadecimalToDecimal(String.format("%02X", scanResult.scanRecord?.bytes!![15]))) + " mV"
 
-        temp.text = "TEMPERATURA: " + (hexadecimalToDecimal(
-            (scanResult.scanRecord?.bytes!![16].toString())) +
-                hexadecimalToDecimal(scanResult.scanRecord?.bytes!![17].toString())/256).toString() + " ºC"
+        temp.text = "TEMPERATURA: " + (hexadecimalToDecimal(String.format("%02X", scanResult.scanRecord?.bytes!![16])) +
+                hexadecimalToDecimal(String.format("%02X", scanResult.scanRecord?.bytes!![17]))/256.0) + " ºC"
 
-//        uptime.text = "TIEMPO: " + (hexadecimalToDecimal(
-//            (scanResult.scanRecord?.bytes!![24].toString())) =>
-//        hexadecimalToDecimal(scanResult.scanRecord?.bytes!![25].toString())).toString() + " ms"
+        advertCount.text = "COUNT: " + (hexadecimalToDecimal(String.format("%02X", scanResult.scanRecord?.bytes!![20]) +
+                String.format("%02X", scanResult.scanRecord?.bytes!![21])))
+
+        var mTime = hexadecimalToDecimal(String.format("%02X", scanResult.scanRecord?.bytes!![24]) +
+                String.format("%02X", scanResult.scanRecord?.bytes!![25]))/600.0
+        var minutesSeconds = mTime.toString().split('.')
+        var seconds = minutesSeconds[1].toInt()
+        if (seconds > 60)
+            seconds -= 60
+        uptime.text = "ENCENDIDO: ${minutesSeconds[0]} minutos, $seconds segundos"
     }
 
     private fun scanLeDevice() {
@@ -183,17 +189,17 @@ class SearchBeacon : AppCompatActivity(), View.OnClickListener, BeaconConsumer, 
     }
 
     override fun didRangeBeaconsInRegion(p0: MutableCollection<Beacon>?, p1: Region?) {
-        if (p0!!.isEmpty())
+        /*if (p0!!.isEmpty())
             Log.d(":::", "NO SE HAN DETECTADO BEACONS")
         else {
             p0!!.forEach {
                 if (it.serviceUuid == 0xfeaa && it.beaconTypeCode == 0x00) {
                     if (it.extraDataFields.size > 0) {
-                        //it.extraDataFields[0].toString()
+                        it.extraDataFields[0].toString()
                     }
                 }
             }
-        }
+        }*/
     }
 
     private fun hexadecimalToDecimal(hexaDecimalN : String) : Long {
